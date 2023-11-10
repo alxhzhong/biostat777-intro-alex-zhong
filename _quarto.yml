@@ -2,12 +2,14 @@ project:
   type: website
 
 website:
-  title: "my_website"
+  title: "Alex Zhong"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+      - href: example_analysis.qmd
+        text: Example analysis
 
 format:
   html:
