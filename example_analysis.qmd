@@ -215,6 +215,7 @@ pandemic_sightings<- ufo_sightings %>%
 
 ```{r}
 #| fig-width: 10
+#| warning: false
 transformed_sightings <- usmap_transform(pandemic_sightings, input_names = c("longitude", "latitude")) %>% 
   mutate(time_period = fct_recode(time_period, `Jan-Feb 2020` = "before", `Mar-Apr 2020` = "after"))
 
@@ -252,12 +253,6 @@ diff_sightings <- pandemic_sightings %>%
 ```
 
 ```{r}
-#| fig-cap: Change in UFO sightings before vs. during pandemic by US state
-#| fig-subcap: 
-#|     - "Absolute change"
-#|     - "Percent change"
-#| layout-ncol: 2
-
 # Using Jenks natural breaks to change color scale
 # I feel this makes the scale more readable, especially since 
 abs_scale <- getJenksBreaks(diff_sightings$abs_diff, 7) %>% rescale(to = c(0,1))
@@ -266,17 +261,22 @@ perc_scale <- getJenksBreaks(diff_sightings$perc_diff, 7) %>% rescale(to = c(0,1
 plot_usmap(data = diff_sightings, values = "abs_diff") +
   scale_fill_distiller(palette = "BrBG", direction = 1, values = abs_scale) +
   labs(
-    fill = "Change in \nsightings"
+    title = "Absolute change in UFO sightings before vs. during pandemic by US state",
+    subtitle = "The West Coast and upper Midwest had the greatest increase in UFO sightings,\nwhile Florida and Texas saw the greatest decrease in sightings",
+    fill = "Change in \nsightings",
+    caption = "Data from National UFO Reporting Center"
   )
 
 plot_usmap(data = diff_sightings, values = "perc_diff") +
   scale_fill_distiller(palette = "PiYG", direction = 1, values = perc_scale, labels = scales::label_percent()) +
   labs(
-    fill = "% change \nin sightings"
+    title = "Percent change in UFO sightings before vs. during pandemic by US state",
+    subtitle = "The upper Midwest had the greatest % increase in UFO sightings,\nwhile Mississippi and Louisiana saw the greatest % decrease in sightings",
+    fill = "% change \nin sightings",
+    caption = "Data from National UFO Reporting Center"
   )
 
 ```
-
 
 ## Summary
 
