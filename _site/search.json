@@ -60,7 +60,7 @@
     "href": "example_analysis.html#data-source-and-dictionary",
     "title": "Example Analysis: UFO Sightings",
     "section": "Data source and dictionary",
-    "text": "Data source and dictionary\nThe datasets used in this analysis come from the 06/20/2023 Tidy Tuesday GitHub repository. Original data comes from the National UFO Reporting Center.\nI will be using the ufo_sightings and places datasets, whose data dictionaries can be found here."
+    "text": "Data source and dictionary\nThe datasets used in this analysis come from the 06/20/2023 Tidy Tuesday GitHub repository. Original data comes from the National UFO Reporting Center, which has maintained a public database of globally crowdsourced eyewitness reports of UFO sightings since 1994.\nI will be using the ufo_sightings and places datasets, whose data dictionaries can be found here."
   },
   {
     "objectID": "example_analysis.html#data-import-and-cleaning",
@@ -95,7 +95,7 @@
     "href": "example_analysis.html#functions-used",
     "title": "Example Analysis: UFO Sightings",
     "section": "Functions used",
-    "text": "Functions used\ndplyr: select, filter, mutate, distinct, left_join, relocate, pivot_wider\nggplot2 geom_: geom_point, geom_bar, geom_smooth"
+    "text": "Functions used\ndplyr: select, filter, mutate, distinct, left_join, relocate\ntidyr: pivot_wider\nggplot2 geom_: geom_point, geom_bar, geom_smooth"
   },
   {
     "objectID": "example_analysis.html#references",

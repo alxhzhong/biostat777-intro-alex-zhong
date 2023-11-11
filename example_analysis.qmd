@@ -37,7 +37,7 @@ If the Pentagon are reading this and [you are hiring](https://thehill.com/policy
 
 ## Data source and dictionary
 
-The datasets used in this analysis come from the 06/20/2023 Tidy Tuesday [GitHub repository](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-06-20){.external target="_blank"}. Original data comes from the [National UFO Reporting Center](https://nuforc.org/ndx/?id=shape){.external target="_blank"}.
+The datasets used in this analysis come from the 06/20/2023 Tidy Tuesday [GitHub repository](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-06-20){.external target="_blank"}. Original data comes from the [National UFO Reporting Center](https://nuforc.org/ndx/?id=shape){.external target="_blank"}, which has maintained a public database of globally crowdsourced eyewitness reports of UFO sightings since 1994.
 
 I will be using the `ufo_sightings` and `places` datasets, whose data dictionaries can be found [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-06-20#data-dictionary){.external target="_blank"}.
 
@@ -313,7 +313,9 @@ Overall, results from this analysis generally agree with the New York Times arti
 
 ## Functions used
 
-**dplyr**: `select`, `filter`, `mutate`, `distinct`, `left_join`, `relocate`, `pivot_wider`
+**dplyr**: `select`, `filter`, `mutate`, `distinct`, `left_join`, `relocate`
+
+**tidyr**: `pivot_wider`
 
 **ggplot2 geom\_**: `geom_point`, `geom_bar`, `geom_smooth`
 

@@ -243,7 +243,7 @@ An important message
 </section>
 <section id="data-source-and-dictionary" class="level2">
 <h2 class="anchored" data-anchor-id="data-source-and-dictionary">Data source and dictionary</h2>
-<p>The datasets used in this analysis come from the 06/20/2023 Tidy Tuesday <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-06-20" class="external" target="_blank">GitHub repository</a>. Original data comes from the <a href="https://nuforc.org/ndx/?id=shape" class="external" target="_blank">National UFO Reporting Center</a>.</p>
+<p>The datasets used in this analysis come from the 06/20/2023 Tidy Tuesday <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-06-20" class="external" target="_blank">GitHub repository</a>. Original data comes from the <a href="https://nuforc.org/ndx/?id=shape" class="external" target="_blank">National UFO Reporting Center</a>, which has maintained a public database of globally crowdsourced eyewitness reports of UFO sightings since 1994.</p>
 <p>I will be using the <code>ufo_sightings</code> and <code>places</code> datasets, whose data dictionaries can be found <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-06-20#data-dictionary" class="external" target="_blank">here</a>.</p>
 </section>
 <section id="data-import-and-cleaning" class="level2 page-columns page-full">
@@ -635,7 +635,8 @@ Why do we see a rise in UFO sightings in 2019?
 </section>
 <section id="functions-used" class="level2">
 <h2 class="anchored" data-anchor-id="functions-used">Functions used</h2>
-<p><strong>dplyr</strong>: <code>select</code>, <code>filter</code>, <code>mutate</code>, <code>distinct</code>, <code>left_join</code>, <code>relocate</code>, <code>pivot_wider</code></p>
+<p><strong>dplyr</strong>: <code>select</code>, <code>filter</code>, <code>mutate</code>, <code>distinct</code>, <code>left_join</code>, <code>relocate</code></p>
+<p><strong>tidyr</strong>: <code>pivot_wider</code></p>
 <p><strong>ggplot2 geom_</strong>: <code>geom_point</code>, <code>geom_bar</code>, <code>geom_smooth</code></p>
 </section>
 <section id="references" class="level2">
