@@ -203,7 +203,7 @@ div.csl-indent {
 </div>
 <section id="motivation-and-questions" class="level2">
 <h2 class="anchored" data-anchor-id="motivation-and-questions">Motivation and questions</h2>
-<p>In a 2021 <a href="https://www.nytimes.com/2021/04/09/nyregion/ufo-sightings-recent.html" class="external" target="_blank">article</a>, Sarah Maslin Nir at the New York Times reported an increase in UFO sightings over the pandemic, especially in New York state. Several possible causes were identified, including more time spent home, lower light pollution, and urban residents moving to rural areas, especially during the start of the pandemic in early 2020 <span class="citation" data-cites="nir2021">(<a href="#ref-nir2021" role="doc-biblioref">Nir 2021</a>)</span>.</p>
+<p>In a 2021 <a href="https://www.nytimes.com/2021/04/09/nyregion/ufo-sightings-recent.html" class="external" target="_blank">article</a>, Sarah Maslin Nir at the New York Times reported an increase in UFO sightings over the pandemic, especially in New York state. Several possible causes were identified, including more time spent home, lower light pollution, and urban residents moving to rural areas, especially during the start of the pandemic in early 2020<span class="citation" data-cites="nir2021"><sup><a href="#ref-nir2021" role="doc-biblioref">1</a></sup></span>.</p>
 <p>I found this intriguing, and wanted to replicate these findings with more recent data to see whether UFO sightings continue to be elevated. I also wanted to explore whether increased UFO sightings were reported across the United States (or were a localized New York event).</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -311,7 +311,7 @@ $ population           &lt;dbl&gt; 15752, 1352, 388072, 84067, 256927, 60451, 24
 $ elevation_m          &lt;dbl&gt; 160, 192, 199, 235, 17, 382, 89, 11, NA, 1156, 16…</code></pre>
 </div>
 </div>
-<p>Then, to clean and wrangle the <code>places</code> dataset. These are fairly clean+tidy datasets already, so there isn’t much to do:</p>
+<p>Then, to clean and wrangle the <code>places</code> dataset. These are fairly clean &amp; tidy datasets already, so there isn’t much to do:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -410,7 +410,7 @@ $ elevation_m          &lt;dbl&gt; 160, 192, 199, 235, 17, 382, 89, 11, NA, 1156
 <section id="changes-in-sightings-during-pandemic" class="level2">
 <h2 class="anchored" data-anchor-id="changes-in-sightings-during-pandemic">Changes in sightings during pandemic</h2>
 <p>Now that we have our final dataset, let’s look at the change in sightings over the pandemic.</p>
-<p>Since the NYTimes article cited people staying at home as one of the reasons that UFO sightings increased, I’ve chosen to highlight the period of decreased mobility in the US as described by Elarde et al., who estimated that time spent in public places sharply decreased in March 2020 and returned to pre-pandemic levels by June 2020 <span class="citation" data-cites="elarde2021">(<a href="#ref-elarde2021" role="doc-biblioref">Elarde <em>and others</em> 2021</a>)</span>.</p>
+<p>Since the NYTimes article cited people staying at home as one of the reasons that UFO sightings increased, I’ve chosen to highlight the period of decreased mobility in the US as described by Elarde et al., who estimated that time spent in public places sharply decreased in March 2020 and returned to pre-pandemic levels by June 2020<span class="citation" data-cites="elarde2021"><sup><a href="#ref-elarde2021" role="doc-biblioref">2</a></sup></span>.</p>
 <p>First, I plotted UFO sighting count by day:</p>
 <div class="cell">
 <details>
@@ -438,13 +438,14 @@ $ elevation_m          &lt;dbl&gt; 160, 192, 199, 235, 17, 382, 89, 11, NA, 1156
 <span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
 <span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Daily UFO sighting counts in the US (2018-2023)"</span>,</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Sightings increased over 2019 and peaked in early 2020 just before pandemic;</span><span class="sc">\n</span><span class="st">Elevated sighting counts were not sustained past 2020"</span>,</span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Date"</span>,</span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Daily UFO sighting count"</span>,</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Data from National UFO Reporting Center"</span></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_date</span>(<span class="at">breaks =</span> <span class="st">"1 year"</span>, <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">date_format</span>(<span class="st">"%Y"</span>)) <span class="sc">+</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Daily UFO sighting counts in the US (2018-2023)"</span>,</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Sightings increased over 2019 and peaked in early 2020 just before pandemic;</span><span class="sc">\n</span><span class="st">Elevated sighting counts were not sustained past 2020"</span>,</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Daily UFO sighting count"</span>,</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Data from National UFO Reporting Center"</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
@@ -453,7 +454,30 @@ $ elevation_m          &lt;dbl&gt; 160, 192, 199, 235, 17, 382, 89, 11, NA, 1156
 <p><img src="example_analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>SOME ANALYSIS HERE</p>
+<p>From the plot above, it seems that daily UFO sighting counts started to increase around 2019, then peaked right before the start of the pandemic in the US before falling over the rest of 2020. There is a slight increase in daily sightings towards the end of 2022, but levels are fairly similar to pre-2019.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why do we see a rise in UFO sightings in 2019?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Using data from the National UFO Reporting Center, Cockrell et al.&nbsp;set out to analyze whether the COVID-19 pandemic was associated with an increase in UFO sighting reports.</p>
+<p>They found a similar rise in UFO sighting reports starting in 2019, and posited that this was due to the then concurrent launches of the Starlink satellites. Cockrell et al.&nbsp;argue that these satellites provided new visual phenomena that were unique enough to report as UFOs, and showed that Starlink launches were quickly followed by new reports of UFOs described similarly to the satellites<span class="citation" data-cites="cockrell"><sup><a href="#ref-cockrell" role="doc-biblioref">3</a></sup></span>.</p>
+<div id="fig-starlink" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://media.nbcconnecticut.com/2023/02/starlink-satellites-021323.jpg?quality=85&amp;strip=all&amp;resize=1200%2C675" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Zachary Hagerman/<a href="https://www.nbcconnecticut.com/news/local/starlink-satellites-to-pass-over-connecticut-again-tuesday-evening/2976099/" target="&quot;_blank:">NBC Connecticut</a> (Feb 13, 2023)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 <p>The sighting counts by day are quite noisy, so I also plotted UFO sighting count by month:</p>
 <div class="cell">
 <details>
@@ -461,42 +485,45 @@ $ elevation_m          &lt;dbl&gt; 160, 192, 199, 235, 17, 382, 89, 11, NA, 1156
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># by month:</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ufo_sightings <span class="sc">%&gt;%</span> </span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># taking floor to extract month</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># shift by half month so bars are centered on middle of the month</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">floor_date</span>(date, <span class="st">"months"</span>) <span class="sc">+</span> <span class="dv">15</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>()</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">period =</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(month <span class="sc">%within%</span> <span class="fu">interval</span>(<span class="fu">ymd</span>(<span class="st">"2020-03-01"</span>), <span class="fu">ymd</span>(<span class="st">"2020-06-01"</span>)), <span class="st">"highlight"</span>, <span class="st">"normal"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">floor_date</span>(date, <span class="st">"months"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>()</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add var to highlight pandemic months</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">period =</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(month <span class="sc">%within%</span> <span class="fu">interval</span>(<span class="fu">ymd</span>(<span class="st">"2020-03-01"</span>), <span class="fu">ymd</span>(<span class="st">"2020-05-01"</span>)), <span class="st">"highlight"</span>, <span class="st">"normal"</span>))) <span class="sc">%&gt;%</span> </span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> count, <span class="at">fill =</span> period)) <span class="sc">+</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"orange"</span>, <span class="st">"grey50"</span>)) <span class="sc">+</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="fu">ymd</span>(<span class="st">"2020-06-05"</span>), </span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="dv">600</span>,</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">hjust =</span> <span class="dv">0</span>,</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> <span class="st">"Decreased mobility </span><span class="sc">\n</span><span class="st">during pandemic </span><span class="sc">\n</span><span class="st">Mar-May, 2020"</span>,</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"darkorange"</span>,</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">10</span><span class="sc">/</span>.pt) <span class="sc">+</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Monthly UFO sighting counts in the US (2018-2023)"</span>,</span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Monthly sightings sharply increased during start of pandemic (Mar/Apr 2020)"</span>,</span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Date"</span>,</span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Monthly UFO sighting count"</span>,</span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Data from National UFO Reporting Center"</span></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># shift by half month so bars are centered on middle of the month</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"orange"</span>, <span class="st">"grey50"</span>)) <span class="sc">+</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="fu">ymd</span>(<span class="st">"2020-06-05"</span>), </span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="dv">600</span>,</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> <span class="st">"Decreased mobility </span><span class="sc">\n</span><span class="st">during pandemic </span><span class="sc">\n</span><span class="st">Mar-May, 2020"</span>,</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"darkorange"</span>,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">10</span><span class="sc">/</span>.pt) <span class="sc">+</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_date</span>(<span class="at">breaks =</span> <span class="st">"1 year"</span>, <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">date_format</span>(<span class="st">"%Y"</span>)) <span class="sc">+</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Monthly UFO sighting counts in the US (2018-2023)"</span>,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Monthly sightings sharply increased during start of pandemic (Mar/Apr 2020)"</span>,</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Monthly UFO sighting count"</span>,</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Data from National UFO Reporting Center"</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="example_analysis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>From the monthly plot, we can see that indeed, the first two months of restricted movement in the pandemic (March and April, 2020) have much higher UFO sighting counts compared to January and February, 2020.</p>
-<p>We’ll use that 4-month time span of Jan-Apr 2020 to look at the geographic distribution of the change in sightings.</p>
+<p>Monthly sightings follow a similar trend to daily sightings: an increase starting in early 2020, peaking around the start of the pandemic in the US, then a decrease by the end of 2020. There is also a similar small increase in sightings around late 2022.</p>
+<p>It also seems that indeed, the first two months of restricted movement in the pandemic (March and April, 2020) have much higher UFO sighting counts compared to the prior two months (January and February, 2020). We’ll use that 4-month time span of Jan-Apr 2020 to look at the geographic distribution of the change in sightings.</p>
 </section>
 <section id="geographic-distribution-of-change-in-sightings" class="level2">
 <h2 class="anchored" data-anchor-id="geographic-distribution-of-change-in-sightings">Geographic distribution of change in sightings</h2>
+<p>Next, let’s look at the geographic distribution of changes in sightings.</p>
 <p>First, I’ll filter the data to include only reports from Jan-Apr 2020:</p>
 <div class="cell">
 <details>
@@ -506,30 +533,43 @@ $ elevation_m          &lt;dbl&gt; 160, 192, 199, 235, 17, 382, 89, 11, NA, 1156
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">time_period =</span> <span class="fu">case_when</span>(date <span class="sc">&lt;</span> <span class="st">"2020-03-01"</span> <span class="sc">~</span> <span class="st">"before"</span>, <span class="at">.default =</span> <span class="st">"after"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"before"</span>, <span class="st">"after"</span>))</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>pandemic_sightings <span class="sc">%&gt;%</span> </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time_period) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+# Groups:   time_period [2]
+  time_period     n
+  &lt;fct&gt;       &lt;int&gt;
+1 before        705
+2 after        1204</code></pre>
 </div>
+</div>
+<p>We have 705 sightings in Jan-Feb 2020, and 1204 sightings in Mar-Apr 2020. Let’s see where those sightings were reported in the US:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>transformed_sightings <span class="ot">&lt;-</span> <span class="fu">usmap_transform</span>(pandemic_sightings, <span class="at">input_names =</span> <span class="fu">c</span>(<span class="st">"longitude"</span>, <span class="st">"latitude"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time_period =</span> <span class="fu">fct_recode</span>(time_period, <span class="st">`</span><span class="at">Jan-Feb 2020</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"before"</span>, <span class="st">`</span><span class="at">Mar-Apr 2020</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"after"</span>))</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_usmap</span>() <span class="sc">+</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(transformed_sightings, <span class="at">mapping =</span> <span class="fu">aes</span>(x, y, <span class="at">color =</span> time_period), <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>time_period) <span class="sc">+</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"UFO sightings before and during pandemic stay-at-home orders in US"</span>,</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"The West Coast and Midwest experienced the greatest increase in UFO sightings"</span>,</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from National UFO Reporting Center"</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>transformed_sightings <span class="ot">&lt;-</span> <span class="fu">usmap_transform</span>(pandemic_sightings, <span class="at">input_names =</span> <span class="fu">c</span>(<span class="st">"longitude"</span>, <span class="st">"latitude"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time_period =</span> <span class="fu">fct_recode</span>(time_period, <span class="st">`</span><span class="at">Jan-Feb 2020</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"before"</span>, <span class="st">`</span><span class="at">Mar-Apr 2020</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"after"</span>))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_usmap</span>() <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(transformed_sightings, <span class="at">mapping =</span> <span class="fu">aes</span>(x, y, <span class="at">color =</span> time_period), <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>time_period) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"UFO sightings before and during pandemic stay-at-home orders in US"</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"The West Coast and Midwest experienced the greatest increase in UFO sightings"</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from National UFO Reporting Center"</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="example_analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="960"></p>
@@ -539,56 +579,59 @@ $ elevation_m          &lt;dbl&gt; 160, 192, 199, 235, 17, 382, 89, 11, NA, 1156
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>diff_sightings <span class="ot">&lt;-</span> pandemic_sightings <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(state, time_period) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> time_period, <span class="at">values_from =</span> n) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">abs_diff =</span> after <span class="sc">-</span> before,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">perc_diff =</span> abs_diff <span class="sc">/</span> before,</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fips =</span> <span class="fu">fips</span>(state)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(state, fips, abs_diff, perc_diff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>diff_sightings <span class="ot">&lt;-</span> pandemic_sightings <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(state, time_period) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> time_period, <span class="at">values_from =</span> n) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">abs_diff =</span> after <span class="sc">-</span> before,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">perc_diff =</span> abs_diff <span class="sc">/</span> before,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fips =</span> <span class="fu">fips</span>(state)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(state, fips, abs_diff, perc_diff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using Jenks natural breaks to change color scale</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># I feel this makes the scale more readable, especially since </span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>abs_scale <span class="ot">&lt;-</span> <span class="fu">getJenksBreaks</span>(diff_sightings<span class="sc">$</span>abs_diff, <span class="dv">7</span>) <span class="sc">%&gt;%</span> <span class="fu">rescale</span>(<span class="at">to =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>perc_scale <span class="ot">&lt;-</span> <span class="fu">getJenksBreaks</span>(diff_sightings<span class="sc">$</span>perc_diff, <span class="dv">7</span>) <span class="sc">%&gt;%</span> <span class="fu">rescale</span>(<span class="at">to =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_usmap</span>(<span class="at">data =</span> diff_sightings, <span class="at">values =</span> <span class="st">"abs_diff"</span>) <span class="sc">+</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"BrBG"</span>, <span class="at">direction =</span> <span class="dv">1</span>, <span class="at">values =</span> abs_scale) <span class="sc">+</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Absolute change in UFO sightings before vs. during pandemic by US state"</span>,</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"The West Coast and upper Midwest had the greatest increase in UFO sightings,</span><span class="sc">\n</span><span class="st">while Florida and Texas saw the greatest decrease in sightings"</span>,</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Change in </span><span class="sc">\n</span><span class="st">sightings"</span>,</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from National UFO Reporting Center"</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using Jenks natural breaks to change color scale</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># I feel this makes the scale more readable, especially since there are a few states with very high values </span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>abs_scale <span class="ot">&lt;-</span> <span class="fu">getJenksBreaks</span>(diff_sightings<span class="sc">$</span>abs_diff, <span class="dv">7</span>) <span class="sc">%&gt;%</span> <span class="fu">rescale</span>(<span class="at">to =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>perc_scale <span class="ot">&lt;-</span> <span class="fu">getJenksBreaks</span>(diff_sightings<span class="sc">$</span>perc_diff, <span class="dv">7</span>) <span class="sc">%&gt;%</span> <span class="fu">rescale</span>(<span class="at">to =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_usmap</span>(<span class="at">data =</span> diff_sightings, <span class="at">values =</span> <span class="st">"abs_diff"</span>) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"BrBG"</span>, <span class="at">direction =</span> <span class="dv">1</span>, <span class="at">values =</span> abs_scale) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Absolute change in UFO sightings before vs. during pandemic by US state"</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"The West Coast and upper Midwest had the greatest increase in UFO sightings,</span><span class="sc">\n</span><span class="st">while Florida and Texas saw the greatest decrease in sightings"</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Change in </span><span class="sc">\n</span><span class="st">sightings"</span>,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from National UFO Reporting Center"</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="example_analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_usmap</span>(<span class="at">data =</span> diff_sightings, <span class="at">values =</span> <span class="st">"perc_diff"</span>) <span class="sc">+</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"PiYG"</span>, <span class="at">direction =</span> <span class="dv">1</span>, <span class="at">values =</span> perc_scale, <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>()) <span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Percent change in UFO sightings before vs. during pandemic by US state"</span>,</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"The upper Midwest had the greatest % increase in UFO sightings,</span><span class="sc">\n</span><span class="st">while Mississippi and Louisiana saw the greatest % decrease in sightings"</span>,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"% change </span><span class="sc">\n</span><span class="st">in sightings"</span>,</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from National UFO Reporting Center"</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_usmap</span>(<span class="at">data =</span> diff_sightings, <span class="at">values =</span> <span class="st">"perc_diff"</span>) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"PiYG"</span>, <span class="at">direction =</span> <span class="dv">1</span>, <span class="at">values =</span> perc_scale, <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>()) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Percent change in UFO sightings before vs. during pandemic by US state"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"The upper Midwest had the greatest % increase in UFO sightings,</span><span class="sc">\n</span><span class="st">while Mississippi and Louisiana saw the greatest % decrease in sightings"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"% change </span><span class="sc">\n</span><span class="st">in sightings"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data from National UFO Reporting Center"</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="example_analysis_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>State-level change maps support our initial observation that sightings increased the most in the Midwest and West Coast. However, we can also see that some states experienced a decrease in sightings, with many in the South.</p>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>This analysis explored the change in UFO sightings over time and over space in the United States, with particular attention to changes over the start of the COVID-19 pandemic (March through May, 2020). We found an increase in monthly sightings during months with restricted mobility (March/Apr 2020) compared to just before stay-at-home orders were issued (Jan/Feb 2020). However, analysis of daily sightings revealed a concurrent trend of increasing reports over 2019 into 2020, which may impact any inferences about the cause of the increase in sightings. Looking at the change in sightings by state, we observe the greatest increase in the West Coast (California, Oregon, Washington) and Upper Midwest (Minnesota, Wisconsin, Illinois, Michigan), and a decrease in states mostly in the South (Texas, Louisiana, Mississippi, Texas).</p>
+<p>Overall, results from this analysis generally agree with the New York Times article–we do observe an increase in UFO sighting reports. However, the cause(s) of this increase may be more complicated, with potential regional/local and non-pandemic (e.g.&nbsp;Starlink satellite) factors at play.</p>
 </section>
 <section id="functions-used" class="level2">
 <h2 class="anchored" data-anchor-id="functions-used">Functions used</h2>
@@ -597,12 +640,15 @@ $ elevation_m          &lt;dbl&gt; 160, 192, 199, 235, 17, 382, 89, 11, NA, 1156
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-elarde2021" class="csl-entry" role="listitem">
-Elarde, J., Kim, J.-S., Kavak, H., Züfle, A. and Anderson, T. (2021). <a href="https://doi.org/10.1371/journal.pone.0259031">Change of human mobility during COVID-19: A United States case study</a>. <em>PLOS ONE</em> <strong>16</strong>, e0259031.
-</div>
+<div id="refs" class="references csl-bib-body" data-line-spacing="2" role="list">
 <div id="ref-nir2021" class="csl-entry" role="listitem">
-Nir, S. M. (2021). They are not alone: U.f.o. Reports surged in the pandemic. <em>The New York Times</em>. <a href="https://www.nytimes.com/2021/04/09/nyregion/ufo-sightings-recent.html">https://www.nytimes.com/2021/04/09/nyregion/ufo-sightings-recent.html</a>.
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Nir, S. M. <a href="https://www.nytimes.com/2021/04/09/nyregion/ufo-sightings-recent.html">They are not alone: U.f.o. Reports surged in the pandemic</a>. <em>The New York Times</em> (2021).</div>
+</div>
+<div id="ref-elarde2021" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Elarde, J., Kim, J.-S., Kavak, H., Züfle, A. &amp; Anderson, T. <a href="https://doi.org/10.1371/journal.pone.0259031">Change of human mobility during COVID-19: A United States case study</a>. <em>PLOS ONE</em> <strong>16</strong>, e0259031 (2021).</div>
+</div>
+<div id="ref-cockrell" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Cockrell, R. C., Murphy, L. &amp; Rodeghier, M. Social factors and UFO reports: Was the SARS-CoV-2 pandemic associated with an increase in UFO reporting? doi:<a href="https://doi.org/10.31235/osf.io/exm7c">10.31235/osf.io/exm7c</a>.</div>
 </div>
 </div>
 

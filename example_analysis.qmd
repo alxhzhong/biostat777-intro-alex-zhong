@@ -1,7 +1,7 @@
 ---
 title: "Example Analysis: UFO Sightings"
 bibliography: references.bib
-csl: biostatistics.csl
+csl: nature.csl
 ---
 
 ::: {#fig-ufo}
@@ -74,7 +74,7 @@ glimpse(raw_ufo_sightings)
 glimpse(raw_places)
 ```
 
-Then, to clean and wrangle the `places` dataset. These are fairly clean+tidy datasets already, so there isn't much to do:
+Then, to clean and wrangle the `places` dataset. These are fairly clean & tidy datasets already, so there isn't much to do:
 
 ```{r}
 places <- raw_places %>% 
@@ -99,7 +99,7 @@ places <- places %>%
   distinct()
 ```
 
-Next, to wrangle the `ufo_sightings` dataset, I'll remove the time information and keep observations from 2018 on (to give us \~2 years before and after the pandemic). Then, I'll add in latitude/longitude data from `places`.
+Next, to wrangle the `ufo_sightings` dataset, I'll remove the time information and keep observations from 2018 on (to give us ~2 years before and after the pandemic). Then, I'll add in latitude/longitude data from `places`.
 
 ```{r}
 ufo_sightings <- raw_ufo_sightings %>% 
@@ -150,6 +150,7 @@ ufo_sightings %>%
     geom_point(size = 0.5) +
     geom_smooth() +
     theme_classic() +
+    scale_x_date(breaks = "1 year", labels = scales::date_format("%Y")) +
     labs(
       title = "Daily UFO sighting counts in the US (2018-2023)",
       subtitle = "Sightings increased over 2019 and peaked in early 2020 just before pandemic;\nElevated sighting counts were not sustained past 2020",
@@ -159,7 +160,21 @@ ufo_sightings %>%
     )
 ```
 
-SOME ANALYSIS HERE
+From the plot above, it seems that daily UFO sighting counts started to increase around 2019, then peaked right before the start of the pandemic in the US before falling over the rest of 2020. There is a slight increase in daily sightings towards the end of 2022, but levels are fairly similar to pre-2019.
+
+::: {.callout-note collapse="true"}
+## Why do we see a rise in UFO sightings in 2019?
+
+Using data from the National UFO Reporting Center, Cockrell et al. set out to analyze whether the COVID-19 pandemic was associated with an increase in UFO sighting reports.
+
+They found a similar rise in UFO sighting reports starting in 2019, and posited that this was due to the then concurrent launches of the Starlink satellites. Cockrell et al. argue that these satellites provided new visual phenomena that were unique enough to report as UFOs, and showed that Starlink launches were quickly followed by new reports of UFOs described similarly to the satellites [@cockrell].
+
+::: {#fig-starlink}
+![](https://media.nbcconnecticut.com/2023/02/starlink-satellites-021323.jpg?quality=85&strip=all&resize=1200%2C675)
+
+Zachary Hagerman/[NBC Connecticut](https://www.nbcconnecticut.com/news/local/starlink-satellites-to-pass-over-connecticut-again-tuesday-evening/2976099/){target="\"_blank:"} (Feb 13, 2023)
+:::
+:::
 
 The sighting counts by day are quite noisy, so I also plotted UFO sighting count by month:
 
@@ -167,15 +182,16 @@ The sighting counts by day are quite noisy, so I also plotted UFO sighting count
 # by month:
 ufo_sightings %>% 
   # taking floor to extract month
-  # shift by half month so bars are centered on middle of the month
-  mutate(month = floor_date(date, "months") + 15) %>% 
+  mutate(month = floor_date(date, "months")) %>% 
   group_by(month) %>% 
   summarize(
     count = n()
   ) %>% 
-  mutate(period = factor(ifelse(month %within% interval(ymd("2020-03-01"), ymd("2020-06-01")), "highlight", "normal"))) %>% 
+  # add var to highlight pandemic months
+  mutate(period = factor(ifelse(month %within% interval(ymd("2020-03-01"), ymd("2020-05-01")), "highlight", "normal"))) %>% 
   ggplot(mapping = aes(x = month, y = count, fill = period)) +
-    geom_bar(stat = "identity") +
+    # shift by half month so bars are centered on middle of the month
+    geom_bar(stat = "identity", position = position_nudge(x = 15)) +
     scale_fill_manual(values = c("orange", "grey50")) +
     annotate("text",
              x = ymd("2020-06-05"), 
@@ -185,6 +201,7 @@ ufo_sightings %>%
              color = "darkorange",
              size = 10/.pt) +
     theme_classic() +
+    scale_x_date(breaks = "1 year", labels = scales::date_format("%Y")) +
     theme(legend.position = "none") +
     labs(
       title = "Monthly UFO sighting counts in the US (2018-2023)",
@@ -196,13 +213,16 @@ ufo_sightings %>%
     
 ```
 
-From the monthly plot, we can see that indeed, the first two months of restricted movement in the pandemic (March and April, 2020) have much higher UFO sighting counts compared to January and February, 2020.
+Monthly sightings follow a similar trend to daily sightings: an increase starting in early 2020, peaking around the start of the pandemic in the US, then a decrease by the end of 2020. There is also a similar small increase in sightings around late 2022.
 
-We'll use that 4-month time span of Jan-Apr 2020 to look at the geographic distribution of the change in sightings.
+It also seems that indeed, the first two months of restricted movement in the pandemic (March and April, 2020) have much higher UFO sighting counts compared to the prior two months (January and February, 2020). We'll use that 4-month time span of Jan-Apr 2020 to look at the geographic distribution of the change in sightings.
 
 ## Geographic distribution of change in sightings
 
+Next, let's look at the geographic distribution of changes in sightings.
+
 First, I'll filter the data to include only reports from Jan-Apr 2020:
+
 ```{r}
 pandemic_sightings<- ufo_sightings %>% 
   filter(date %within% interval(ymd("2020-01-01"), ymd("2020-04-30"))) %>% 
@@ -210,8 +230,13 @@ pandemic_sightings<- ufo_sightings %>%
     time_period = case_when(date < "2020-03-01" ~ "before", .default = "after") %>% 
                   factor(levels = c("before", "after"))
     )
-  
+
+pandemic_sightings %>% 
+  group_by(time_period) %>% 
+  count()
 ```
+
+We have 705 sightings in Jan-Feb 2020, and 1204 sightings in Mar-Apr 2020. Let's see where those sightings were reported in the US:
 
 ```{r}
 #| fig-width: 10
@@ -254,7 +279,7 @@ diff_sightings <- pandemic_sightings %>%
 
 ```{r}
 # Using Jenks natural breaks to change color scale
-# I feel this makes the scale more readable, especially since 
+# I feel this makes the scale more readable, especially since there are a few states with very high values 
 abs_scale <- getJenksBreaks(diff_sightings$abs_diff, 7) %>% rescale(to = c(0,1))
 perc_scale <- getJenksBreaks(diff_sightings$perc_diff, 7) %>% rescale(to = c(0,1))
 
@@ -278,7 +303,13 @@ plot_usmap(data = diff_sightings, values = "perc_diff") +
 
 ```
 
+State-level change maps support our initial observation that sightings increased the most in the Midwest and West Coast. However, we can also see that some states experienced a decrease in sightings, with many in the South.
+
 ## Summary
+
+This analysis explored the change in UFO sightings over time and over space in the United States, with particular attention to changes over the start of the COVID-19 pandemic (March through May, 2020). We found an increase in monthly sightings during months with restricted mobility (March/Apr 2020) compared to just before stay-at-home orders were issued (Jan/Feb 2020). However, analysis of daily sightings revealed a concurrent trend of increasing reports over 2019 into 2020, which may impact any inferences about the cause of the increase in sightings. Looking at the change in sightings by state, we observe the greatest increase in the West Coast (California, Oregon, Washington) and Upper Midwest (Minnesota, Wisconsin, Illinois, Michigan), and a decrease in states mostly in the South (Texas, Louisiana, Mississippi, Texas). 
+
+Overall, results from this analysis generally agree with the New York Times article--we do observe an increase in UFO sighting reports. However, the cause(s) of this increase may be more complicated, with potential regional/local and non-pandemic (e.g. Starlink satellite) factors at play.
 
 ## Functions used
 
