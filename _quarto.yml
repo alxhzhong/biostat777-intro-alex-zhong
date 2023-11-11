@@ -20,6 +20,8 @@ format:
     toc: true
     link-external-icon: true
     link-external-newwindow: true
+    code-fold: true
+    code-summary: "Show the code"
 
 
 

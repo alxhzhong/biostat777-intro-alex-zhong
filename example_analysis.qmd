@@ -17,7 +17,7 @@ In a 2021 [article](https://www.nytimes.com/2021/04/09/nyregion/ufo-sightings-re
 I found this intriguing, and wanted to replicate these findings with more recent data to see whether UFO sightings continue to be elevated. I also wanted to explore whether increased UFO sightings were reported across the United States (or were a localized New York event).
 
 ::: callout-note
-This is an assignment for my statistical computing course. I am not a subject matter expert, and this is not a serious analysis.
+This is an assignment for my statistical computing course. I am not a subject matter expert, and all analyses are for demonstration purposes only.
 :::
 
 My questions for this analysis are:
@@ -46,10 +46,16 @@ I will be using the `ufo_sightings` and `places` datasets, whose data dictionari
 First, to import the datasets:
 
 ```{r}
+#| warning: false
+
 # load needed packages
 library(tidyverse)
 library(tidytuesdayR)
 library(here)
+library(usmap)
+library(sp)
+library(BAMMtools)
+library(scales)
 
 # load datasets
 if (!file.exists(here("data", "ufo_sightings.RDS"))) {
@@ -68,7 +74,7 @@ glimpse(raw_ufo_sightings)
 glimpse(raw_places)
 ```
 
-Then, to clean and wrangle the places dataset:
+Then, to clean and wrangle the `places` dataset. These are fairly clean+tidy datasets already, so there isn't much to do:
 
 ```{r}
 places <- raw_places %>% 
@@ -76,7 +82,7 @@ places <- raw_places %>%
   filter(country_code == "US")
 ```
 
-Note that the place names can vary in capitalization, so I'll standardize and remove duplicates:
+Note that the place names can vary in capitalization (e.g. Yukon, OK on the right table), so I'll standardize and remove duplicates:
 
 ```{r}
 #| column: margin
@@ -114,7 +120,7 @@ head(ufo_sightings)
 
 ## Changes in sightings during pandemic
 
-Now that we have our wrangled dataset, let's look at the change in sightings over the pandemic.
+Now that we have our final dataset, let's look at the change in sightings over the pandemic.
 
 Since the NYTimes article cited people staying at home as one of the reasons that UFO sightings increased, I've chosen to highlight the period of decreased mobility in the US as described by Elarde et al., who estimated that time spent in public places sharply decreased in March 2020 and returned to pre-pandemic levels by June 2020 [@elarde2021].
 
@@ -139,7 +145,9 @@ ufo_sightings %>%
     theme_classic()
 ```
 
-The
+SOME ANALYSIS HERE
+
+The sighting counts by day are quite noisy, so I also plotted UFO sighting count by month:
 
 ```{r}
 # by month:
@@ -163,11 +171,79 @@ ufo_sightings %>%
     theme_classic()
 ```
 
+From the monthly plot, we can see that indeed, the first two months of restricted movement in the pandemic (March and April, 2020) have much higher UFO sighting counts compared to January and February, 2020.
+
+We'll use that 4-month time span of Jan-Apr 2020 to look at the geographic distribution of the change in sightings.
+
+## Geographic distribution of change in sightings
+
+First, I'll filter the data to include only reports from Jan-Apr 2020:
+```{r}
+pandemic_sightings<- ufo_sightings %>% 
+  filter(date %within% interval(ymd("2020-01-01"), ymd("2020-06-01"))) %>% 
+  mutate(
+    time_period = case_when(date < "2020-03-01" ~ "before", .default = "after") %>% 
+                  factor(levels = c("before", "after"))
+    )
+  
+```
+
+```{r}
+#| fig-width: 10
+transformed_sightings <- usmap_transform(pandemic_sightings, input_names = c("longitude", "latitude"))
+
+plot_usmap() +
+  geom_point(transformed_sightings, mapping = aes(x, y, color = time_period), size = 0.5) +
+  facet_wrap(~time_period) +
+  theme_void() +
+  theme(legend.position = "none") +
+  labs(
+    
+  )
+
+```
+
+While it's a bit hard to tell from the maps above, it looks like there was an increase in sightings in the Midwest and West Coast regions of the US. Let's look at the change in sightings by state:
+
+```{r}
+diff_sightings <- pandemic_sightings %>% 
+  group_by(state, time_period) %>% 
+  count() %>% 
+  pivot_wider(names_from = time_period, values_from = n) %>% 
+  mutate(
+    abs_diff = after - before,
+    perc_diff = abs_diff / before,
+    fips = fips(state)
+  ) %>% 
+  select(state, fips, abs_diff, perc_diff)
+```
+
+```{r}
+#| layout-ncol: 2
+
+abs_scale <- getJenksBreaks(diff_sightings$abs_diff, 7) %>% rescale(to = c(0,1))
+perc_scale <- getJenksBreaks(diff_sightings$perc_diff, 7) %>% rescale(to = c(0,1))
+
+plot_usmap(data = diff_sightings, values = "abs_diff") +
+  scale_fill_distiller(palette = "BrBG", direction = 1, values = abs_scale) +
+  labs(
+    fill = "Change in \nsightings"
+  )
+
+plot_usmap(data = diff_sightings, values = "perc_diff") +
+  scale_fill_distiller(palette = "PiYG", direction = 1, values = perc_scale, labels = scales::label_percent()) +
+  labs(
+    fill = "% change \nin sightings"
+  )
+
+```
+
+
 ## Functions used
 
-**dplyr**: `select`, `filter`, `mutate`, `distinct`, `left_join`, `relocate`
+**dplyr**: `select`, `filter`, `mutate`, `distinct`, `left_join`, `relocate`, `pivot_wider`
 
-**ggplot2 geom\_**:
+**ggplot2 geom\_**: `geom_point`, `geom_bar`, `geom_smooth`
 
 ## References
 
