@@ -20,6 +20,7 @@ format:
     toc: true
     link-external-icon: true
     link-external-newwindow: true
+    link-external-filter: https:\/\/alxhzhong.quarto.pub\/biostat777-intro-alex-zhong
     code-fold: true
     code-summary: "Show the code"
 
