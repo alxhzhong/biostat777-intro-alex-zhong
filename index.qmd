@@ -1,11 +1,27 @@
 ---
-title: "Home"
+title: "Alex Zhong"
+image: alex_profilepic.jpeg
+toc: false
+about:
+  template: trestles
+  image-shape: round
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: "https://www.linkedin.com/in/alexhzhong/"
+      target: _blank
+    - icon: github
+      text: GitHub
+      href: "https://github.com/alxhzhong"
+      target: _blank
+    - icon: envelope
+      text: Email
+      href: "mailto:alxhzhong@gmail.com"
 ---
 
-This is a Quarto website.
+### Hello!
+Welcome to my website, and thanks for stopping by!
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+I am a 1st year ScM student studying [Biostatistics](https://publichealth.jhu.edu/departments/biostatistics) at Johns Hopkins Bloomberg School of Public Health.
 
-```{r}
-1 + 1
-```
+To learn more about me, explore the [About](about.qmd) page. For an out of this world analysis, check out the [Example analysis](example_analysis.qmd) page.

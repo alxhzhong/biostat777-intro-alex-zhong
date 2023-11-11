@@ -3,17 +3,19 @@ project:
 
 website:
   title: "Alex Zhong"
+  favicon: favicon.ico
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: about.qmd
+        text: About
       - href: example_analysis.qmd
         text: Example analysis
 
 format:
   html:
-    theme: cosmo
+    theme: yeti
     css: styles.css
     toc: true
 

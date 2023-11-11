@@ -2,14 +2,14 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Home",
+    "title": "Alex Zhong",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "Hello!\nWelcome to my website, and thanks for stopping by!\nI am a 1st year ScM student studying Biostatistics at Johns Hopkins Bloomberg School of Public Health.\nTo learn more about me, explore the About page. For an out of this world analysis, check out the Example analysis page."
   },
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "Alex Zhong",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
   },
