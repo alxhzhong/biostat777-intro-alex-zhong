@@ -167,7 +167,7 @@ From the plot above, it seems that daily UFO sighting counts started to increase
 
 Using data from the National UFO Reporting Center, Cockrell et al. set out to analyze whether the COVID-19 pandemic was associated with an increase in UFO sighting reports.
 
-They found a similar rise in UFO sighting reports starting in 2019, and posited that this was due to the then concurrent launches of the Starlink satellites. Cockrell et al. argue that these satellites provided new visual phenomena that were unique enough to report as UFOs, and showed that Starlink launches were quickly followed by new reports of UFOs described similarly to the satellites [@cockrell].
+They found a similar rise in UFO sighting reports starting in 2019, and posited that this was due to the then concurrent launches of the Starlink satellites. Cockrell et al. argue that these satellites provided new visual phenomena that were unique enough to report as UFOs, and showed that Starlink launches were quickly followed by new reports of UFOs described similarly to the satellites [@Cockrell2023-COCSFA].
 
 ::: {#fig-starlink}
 ![](https://media.nbcconnecticut.com/2023/02/starlink-satellites-021323.jpg?quality=85&strip=all&resize=1200%2C675)
