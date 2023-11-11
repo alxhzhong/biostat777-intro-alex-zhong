@@ -1,5 +1,35 @@
 ---
-title: "Example Analysis"
+title: "Example Analysis: UFO Sightings"
 ---
 
-This is my example analysis.
+:::{#fig-ufo}
+![](https://www.denverpost.com/wp-content/uploads/2017/12/ap17357198852063.jpg?w=780)
+
+James Quigg/The Daily Press, via Associated Press and [The Denver Post](https://www.denverpost.com/2017/12/23/ufo-sighting-california-spacex/){target="_blank:} (Dec 22, 2017)
+:::
+
+## Motivation and questions
+
+In a 2021 [article](https://www.nytimes.com/2021/04/09/nyregion/ufo-sightings-recent.html){.external target="_blank"}, the New York Times reported an increase in UFO sightings over the pandemic, especially in New York state. Several possible causes were identified, including more time spent home, lower light pollution, and urban residents moving to rural areas, especially during the start of the pandemic in early 2020.
+
+I found this intriguing, and wanted to replicate these findings with more recent data to see whether UFO sightings continue to be elevated. I also wanted to explore whether increased UFO sightings were reported across the United States (or were a localized New York event). 
+
+My questions for this analysis are:
+
+- Have UFO sightings increased in 2020-2021, and has the increase continued into later years?
+- How is the change in UFO sightings spatially distributed?
+
+## Intended audience
+The intended audience is the general public, especially UFO enthusiasts.
+
+::: {.callout-note}
+This is an assignment for my statistical computing course. I am not a subject matter expert, and this is not a serious analysis.
+
+However, if the [Pentagon is reading this and you are hiring](https://thehill.com/policy/defense/4300252-pentagon-ufo-chief-to-step-down-next-month/){.external target="_blank"}: I am open for work.
+:::
+
+## Data source and dictionary
+The datasets used in this analysis come from the 06/20/2023 Tidy Tuesday [GitHub repository](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-06-20){.external target="_blank"}. Original data comes from the [National UFO Reporting Center](https://nuforc.org/ndx/?id=shape){.external target="_blank"}.
+
+I will be using the `ufo_sightings` and `places` datasets, whose data dictionaries can be found [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-06-20#data-dictionary){.external target="_blank"}.
+

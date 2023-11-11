@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Alex Zhong - Example Analysis</title>
+<title>Alex Zhong - Example Analysis: UFO Sightings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -106,14 +106,22 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#motivation-and-questions" id="toc-motivation-and-questions" class="nav-link active" data-scroll-target="#motivation-and-questions">Motivation and questions</a></li>
+  <li><a href="#intended-audience" id="toc-intended-audience" class="nav-link" data-scroll-target="#intended-audience">Intended audience</a></li>
+  <li><a href="#data-source-and-dictionary" id="toc-data-source-and-dictionary" class="nav-link" data-scroll-target="#data-source-and-dictionary">Data source and dictionary</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Example Analysis</h1>
+<h1 class="title">Example Analysis: UFO Sightings</h1>
 </div>
 
 
@@ -128,9 +136,47 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>This is my example analysis.</p>
+<div id="fig-ufo" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://www.denverpost.com/wp-content/uploads/2017/12/ap17357198852063.jpg?w=780" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: James Quigg/The Daily Press, via Associated Press and <a href="https://www.denverpost.com/2017/12/23/ufo-sighting-california-spacex/" target="&quot;_blank:">The Denver Post</a> (Dec 22, 2017)</figcaption>
+</figure>
+</div>
+<section id="motivation-and-questions" class="level2">
+<h2 class="anchored" data-anchor-id="motivation-and-questions">Motivation and questions</h2>
+<p>In a 2021 <a href="https://www.nytimes.com/2021/04/09/nyregion/ufo-sightings-recent.html" class="external" target="_blank">article</a>, the New York Times reported an increase in UFO sightings over the pandemic, especially in New York state. Several possible causes were identified, including more time spent home, lower light pollution, and urban residents moving to rural areas, especially during the start of the pandemic in early 2020.</p>
+<p>I found this intriguing, and wanted to replicate these findings with more recent data to see whether UFO sightings continue to be elevated. I also wanted to explore whether increased UFO sightings were reported across the United States (or were a localized New York event).</p>
+<p>My questions for this analysis are:</p>
+<ul>
+<li>Have UFO sightings increased in 2020-2021, and has the increase continued into later years?</li>
+<li>How is the change in UFO sightings spatially distributed?</li>
+</ul>
+</section>
+<section id="intended-audience" class="level2">
+<h2 class="anchored" data-anchor-id="intended-audience">Intended audience</h2>
+<p>The intended audience is the general public, especially UFO enthusiasts.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is an assignment for my statistical computing course. I am not a subject matter expert, and this is not a serious analysis.</p>
+<p>However, if the <a href="https://thehill.com/policy/defense/4300252-pentagon-ufo-chief-to-step-down-next-month/" class="external" target="_blank">Pentagon is reading this and you are hiring</a>: I am open for work.</p>
+</div>
+</div>
+</section>
+<section id="data-source-and-dictionary" class="level2">
+<h2 class="anchored" data-anchor-id="data-source-and-dictionary">Data source and dictionary</h2>
+<p>The datasets used in this analysis come from the 06/20/2023 Tidy Tuesday <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-06-20" class="external" target="_blank">GitHub repository</a>. Original data comes from the <a href="https://nuforc.org/ndx/?id=shape" class="external" target="_blank">National UFO Reporting Center</a>.</p>
+<p>I will be using the <code>ufo_sightings</code> and <code>places</code> datasets, whose data dictionaries can be found <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-06-20#data-dictionary" class="external" target="_blank">here</a>.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -364,6 +410,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
 });
 </script>
 </div> <!-- /content -->
