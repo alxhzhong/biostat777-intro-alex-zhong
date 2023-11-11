@@ -1,35 +1,175 @@
 ---
 title: "Example Analysis: UFO Sightings"
+bibliography: references.bib
+csl: biostatistics.csl
 ---
 
-:::{#fig-ufo}
+::: {#fig-ufo}
 ![](https://www.denverpost.com/wp-content/uploads/2017/12/ap17357198852063.jpg?w=780)
 
-James Quigg/The Daily Press, via Associated Press and [The Denver Post](https://www.denverpost.com/2017/12/23/ufo-sighting-california-spacex/){target="_blank:} (Dec 22, 2017)
+James Quigg/The Daily Press, via Associated Press and [The Denver Post](https://www.denverpost.com/2017/12/23/ufo-sighting-california-spacex/){target="\"_blank:"} (Dec 22, 2017)
 :::
 
 ## Motivation and questions
 
-In a 2021 [article](https://www.nytimes.com/2021/04/09/nyregion/ufo-sightings-recent.html){.external target="_blank"}, the New York Times reported an increase in UFO sightings over the pandemic, especially in New York state. Several possible causes were identified, including more time spent home, lower light pollution, and urban residents moving to rural areas, especially during the start of the pandemic in early 2020.
+In a 2021 [article](https://www.nytimes.com/2021/04/09/nyregion/ufo-sightings-recent.html){.external target="_blank"}, Sarah Maslin Nir at the New York Times reported an increase in UFO sightings over the pandemic, especially in New York state. Several possible causes were identified, including more time spent home, lower light pollution, and urban residents moving to rural areas, especially during the start of the pandemic in early 2020 [@nir2021].
 
-I found this intriguing, and wanted to replicate these findings with more recent data to see whether UFO sightings continue to be elevated. I also wanted to explore whether increased UFO sightings were reported across the United States (or were a localized New York event). 
+I found this intriguing, and wanted to replicate these findings with more recent data to see whether UFO sightings continue to be elevated. I also wanted to explore whether increased UFO sightings were reported across the United States (or were a localized New York event).
+
+::: callout-note
+This is an assignment for my statistical computing course. I am not a subject matter expert, and this is not a serious analysis.
+:::
 
 My questions for this analysis are:
 
-- Have UFO sightings increased in 2020-2021, and has the increase continued into later years?
-- How is the change in UFO sightings spatially distributed?
+-   Have UFO sightings increased in 2020-2021, and has the increase continued into later years?
+-   How is the change in UFO sightings spatially distributed?
 
 ## Intended audience
+
 The intended audience is the general public, especially UFO enthusiasts.
 
-::: {.callout-note}
-This is an assignment for my statistical computing course. I am not a subject matter expert, and this is not a serious analysis.
+::: callout-important
+## An important message for the Pentagon
 
-However, if the [Pentagon is reading this and you are hiring](https://thehill.com/policy/defense/4300252-pentagon-ufo-chief-to-step-down-next-month/){.external target="_blank"}: I am open for work.
+If you (the Pentagon) are reading this [and you are hiring](https://thehill.com/policy/defense/4300252-pentagon-ufo-chief-to-step-down-next-month/){.external target="_blank"}: I am open for work.
 :::
 
 ## Data source and dictionary
+
 The datasets used in this analysis come from the 06/20/2023 Tidy Tuesday [GitHub repository](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-06-20){.external target="_blank"}. Original data comes from the [National UFO Reporting Center](https://nuforc.org/ndx/?id=shape){.external target="_blank"}.
 
 I will be using the `ufo_sightings` and `places` datasets, whose data dictionaries can be found [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-06-20#data-dictionary){.external target="_blank"}.
 
+## Data import and cleaning
+
+First, to import the datasets:
+
+```{r}
+# load needed packages
+library(tidyverse)
+library(tidytuesdayR)
+library(here)
+
+# load datasets
+if (!file.exists(here("data", "ufo_sightings.RDS"))) {
+    ufo_sightings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/ufo_sightings.csv')
+    places <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-06-20/places.csv')
+
+    # save the files to RDS objects
+    saveRDS(ufo_sightings, file = here("data", "ufo_sightings.RDS"))
+    saveRDS(places, file = here("data", "places.RDS"))
+}
+
+raw_ufo_sightings <- readRDS(here("data", "ufo_sightings.RDS"))
+raw_places <- readRDS(here("data", "places.RDS"))
+
+glimpse(raw_ufo_sightings)
+glimpse(raw_places)
+```
+
+Then, to clean and wrangle the places dataset:
+
+```{r}
+places <- raw_places %>% 
+  select(city, state, country_code, latitude, longitude) %>% 
+  filter(country_code == "US")
+```
+
+Note that the place names can vary in capitalization, so I'll standardize and remove duplicates:
+
+```{r}
+#| column: margin
+# ex. Yukon, OK has three entries:
+places %>% 
+  filter(str_detect(city, regex("yukon", ignore_case = TRUE))) %>% 
+  knitr::kable()
+```
+
+```{r}
+# standardize capitalizations
+places <- places %>% 
+  mutate(city = str_to_title(city)) %>% 
+  distinct()
+```
+
+Next, to wrangle the `ufo_sightings` dataset, I'll remove the time information and keep observations from 2018 on (to give us \~2 years before and after the pandemic). Then, I'll add in latitude/longitude data from `places`.
+
+```{r}
+ufo_sightings <- raw_ufo_sightings %>% 
+  select(reported_date_time_utc, city, state, country_code) %>%
+  mutate(
+    date = as_date(reported_date_time_utc),
+    city = str_to_title(city)
+  ) %>% 
+  filter(country_code == "US", date > "2018-01-01") %>% 
+  # add lat/long from places
+  left_join(places, by = join_by(city, state, country_code)) %>% 
+  select(-reported_date_time_utc) %>% 
+  relocate(date)
+
+# look at our dataset
+head(ufo_sightings)
+```
+
+## Changes in sightings during pandemic
+
+Now that we have our wrangled dataset, let's look at the change in sightings over the pandemic.
+
+Since the NYTimes article cited people staying at home as one of the reasons that UFO sightings increased, I've chosen to highlight the period of decreased mobility in the US as described by Elarde et al., who estimated that time spent in public places sharply decreased in March 2020 and returned to pre-pandemic levels by June 2020 [@elarde2021].
+
+First, I plotted UFO sighting count by day:
+
+```{r}
+ufo_sightings %>%
+  group_by(date) %>% 
+  summarize(
+    count = n()
+  ) %>% 
+  ggplot(mapping = aes(x = date, y = count)) +
+    annotate("rect", 
+             xmin = ymd("2020-03-01"), 
+             xmax = ymd("2020-06-01"), 
+             ymin = -Inf, 
+             ymax = Inf,
+             fill = "orange",
+             alpha = 0.5) +
+    geom_point(size = 0.5) +
+    geom_smooth() +
+    theme_classic()
+```
+
+The
+
+```{r}
+# by month:
+ufo_sightings %>% 
+  # taking floor to extract month
+  # shift by half month so bars are centered on middle of the month
+  mutate(month = floor_date(date, "months") + 15) %>% 
+  group_by(month) %>% 
+  summarize(
+    count = n()
+  ) %>% 
+  ggplot(mapping = aes(x = month, y = count)) +
+    annotate("rect", 
+             xmin = ymd("2020-03-01"), 
+             xmax = ymd("2020-06-01"), 
+             ymin = -Inf, 
+             ymax = Inf,
+             fill = "orange",
+             alpha = 0.5) +
+    geom_bar(stat = "identity") +
+    theme_classic()
+```
+
+## Functions used
+
+**dplyr**: `select`, `filter`, `mutate`, `distinct`, `left_join`, `relocate`
+
+**ggplot2 geom\_**:
+
+## References
+
+::: {#refs}
+:::
