@@ -1,9 +1,19 @@
 ---
-title: "About"
+title: "About me"
 ---
 
-About this site
+## Education
 
-```{r}
-1 + 1
-```
+**Sc.M. in Biostatistics** | Johns Hopkins Bloomberg School of Public Health *(current)*
+
+**B.S. in Quantitative Sciences** | Emory University
+
+**Associate of Arts** | Oxford College of Emory University
+
+## Experience
+**University of Michigan SPH** | [SIBS](https://sph.umich.edu/bdsi/) Research Student | June - July 2022
+
+**Connecticut Agricultural Experiment Station** | Intern | June - August 2021
+
+## Personal hobbies
+In my free time, I enjoy baking, solving [contest crosswords](https://www.wsj.com/public/resources/documents/crosswordcontestguide.pdf), and catching up on the latest [podcast](https://publichealth.jhu.edu/headlines/public-health-on-call-podcast) episode.

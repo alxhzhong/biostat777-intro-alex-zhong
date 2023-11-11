@@ -24,4 +24,6 @@ Welcome to my website, and thanks for stopping by!
 
 I am a 1st year ScM student studying [Biostatistics](https://publichealth.jhu.edu/departments/biostatistics) at Johns Hopkins Bloomberg School of Public Health.
 
+My research interests include causal inference, clinical trials, and environmental/spatial statistics, though I am interested in exploring new areas in biostatistics.
+
 To learn more about me, explore the [About](about.qmd) page. For an out of this world analysis, check out the [Example analysis](example_analysis.qmd) page.
