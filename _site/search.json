@@ -25,7 +25,7 @@
     "href": "about.html#experience",
     "title": "About me",
     "section": "Experience",
-    "text": "Experience\nUniversity of Michigan SPH | SIBS Research Student | June - July 2022\nConnecticut Agricultural Experiment Station | Intern | June - August 2021"
+    "text": "Experience\nUniversity of Michigan SPH | SIBS Research Student | June - July 2022\n\nI applied SIR, SEIR, and eSIR models to predict the course of the COVID-19 pandemic in Mexico using. Our team also designed an interactive Shiny web app (which is currently down but will be up soon!).\n\nConnecticut Agricultural Experiment Station | Intern | June - August 2021\n\nThrough the DDCSP program at YSE, I helped with programming the data analysis on a project quantifying PFAS pollutants in dried blood spot samples."
   },
   {
     "objectID": "about.html#personal-hobbies",
@@ -102,6 +102,6 @@
     "href": "example_analysis.html#references",
     "title": "Example Analysis: UFO Sightings",
     "section": "References",
-    "text": "References\n\n\n1. Nir, S. M. They are not alone: U.f.o. Reports surged in the pandemic. The New York Times (2021).\n\n\n2. Elarde, J., Kim, J.-S., Kavak, H., Züfle, A. & Anderson, T. Change of human mobility during COVID-19: A United States case study. PLOS ONE 16, e0259031 (2021).\n\n\n3. Cockrell, R. C., Murphy, L. & Rodeghier, M. Social factors and UFO reports: Was the SARS-CoV-2 pandemic associated with an increase in UFO reporting? doi:10.31235/osf.io/exm7c."
+    "text": "References\n\n\n1. Nir, S. M. They are not alone: U.f.o. Reports surged in the pandemic. The New York Times (2021).\n\n\n2. Elarde, J., Kim, J.-S., Kavak, H., Züfle, A. & Anderson, T. Change of human mobility during COVID-19: A United States case study. PLOS ONE 16, e0259031 (2021).\n\n\n3. Cockrell, R. C., Murphy, L. & Rodeghier, M. Social factors and ufo reports: Was the sars-cov-2 pandemic associated with an increase in ufo reporting? Journal of Scientific Exploration 36, (2023)."
   }
 ]
